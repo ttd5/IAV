@@ -365,12 +365,13 @@
 "Assets/Grapher/Core/SettingsWindow.cs"
 "Assets/Grapher/Core/TimeKeeper.cs"
 "Assets/Grapher/Example/GrapherExampleDataProvider.cs"
-"Assets/Scripts/Block.cs"
-"Assets/Scripts/Chunk.cs"
-"Assets/Scripts/CreateQuad.cs"
-"Assets/Scripts/PerlinTest.cs"
-"Assets/Scripts/World.cs"
-"Assets/Scripts/World0.cs"
+"Assets/Scripts/Aulas/CreateQuad.cs"
+"Assets/Scripts/Aulas/PerlinTest.cs"
+"Assets/Scripts/Aulas/World0.cs"
+"Assets/Scripts/Mundo Minecraft/Block.cs"
+"Assets/Scripts/Mundo Minecraft/Chunk.cs"
+"Assets/Scripts/Mundo Minecraft/Utils.cs"
+"Assets/Scripts/Mundo Minecraft/World.cs"
 -langversion:9.0
 
 /deterministic
