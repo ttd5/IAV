@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Utils : MonoBehaviour
 {
-    static float smooth = 0.005f;
-    static int maxHeigth = 40;
+    static float smooth = 0.0002f;
+    static float smooth3D = 10f * smooth;
+    static int maxHeigth = 150;
     static int octaves = 6;
     static float persistence = 0.7f;
+    static float offset = 32000;
 
     public static int GenerateHeight(float x, float z) 
     {
@@ -16,12 +18,24 @@ public class Utils : MonoBehaviour
 
     public static int GenerateStoneHeight(float x, float z) 
     {
-        return (int)Map(0, maxHeigth - 2, 0, 1, fBM(x * 10 * smooth, z * 2 * smooth, octaves - 1, 1.2f * persistence));
+        return (int)Map(0, maxHeigth - 10, 0, 1, fBM(x * 3 * smooth, z * 3 * smooth, octaves - 1, 1.2f * persistence));
     }
 
     static float Map(float newmin, float newmax, float orimin, float orimax, float val)
     {
         return Mathf.Lerp(newmin, newmax, Mathf.InverseLerp(orimin, orimax, val));
+    }
+
+    public static float fBM3D(float x, float y, float z, int octaves, float persistence)
+    {
+        float xy = fBM(x * smooth3D, y * smooth, octaves, persistence);
+        float yx = fBM(y * smooth3D, x * smooth, octaves, persistence);
+        float xz = fBM(x * smooth3D, z * smooth, octaves, persistence);
+        float zx = fBM(z * smooth3D, x * smooth, octaves, persistence);
+        float yz = fBM(y * smooth3D, z * smooth, octaves, persistence);
+        float zy = fBM(z * smooth3D, y * smooth, octaves, persistence);
+
+        return (xy + yx + xz + zx + yz + zy) / 6;
     }
 
     static float fBM(float x, float z, int octaves, float persistence) 
@@ -32,10 +46,10 @@ public class Utils : MonoBehaviour
         float maxValue = 0;
         for(int i = 0; i < octaves; i++)
         {
-            total += Mathf.PerlinNoise(x * frequency, z * frequency) * amplitude;
+            total += Mathf.PerlinNoise((x + offset) * frequency, (z + offset) * frequency) * amplitude;
+            maxValue += amplitude;
             amplitude *= persistence;
             frequency *= 2;
-            maxValue += amplitude;
         }
         return total / maxValue;
     }

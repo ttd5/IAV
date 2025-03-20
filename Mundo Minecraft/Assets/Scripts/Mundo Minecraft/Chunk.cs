@@ -7,6 +7,8 @@ public class Chunk
 {
     public Block[,,] chunkdata;
     public GameObject goChunk;
+    public enum ChunkStatus { DRAW, DONE };
+    public ChunkStatus status;
     Material material;
 
     public Chunk(Vector3 pos, Material material)
@@ -29,8 +31,14 @@ public class Chunk
                 int worldZ = (int)goChunk.transform.position.z + z;
                 int h = Utils.GenerateHeight(worldX, worldZ);
                 int hs = Utils.GenerateStoneHeight(worldX, worldZ);
+                Grapher.Log(Utils.fBM3D(worldX, worldY, worldZ, 1, 0.5f), "noise3D", Color.red);
                 if(worldY <= hs)
-                    chunkdata[x, y, z] = new Block(Block.BlockType.STONE, pos, this, material);
+                {
+                    if (Utils.fBM3D(worldX, worldY, worldZ, 1, 0.5f) < 0.51f)
+                        chunkdata[x, y, z] = new Block(Block.BlockType.STONE, pos, this, material);
+                    else
+                        chunkdata[x, y, z] = new Block(Block.BlockType.AIR, pos, this, material);
+                }
                 else if(worldY == h)
                     chunkdata[x, y, z] = new Block(Block.BlockType.GRASS, pos, this, material);
                 else if (worldY < h)
@@ -40,18 +48,19 @@ public class Chunk
                 }
             }
         }
+        status = ChunkStatus.DRAW;
     }
 
     public void DrawChunk()
     {
-        for(int z = 0; z < World.chunkSize; z++) {
-            for(int y = 0; y < World.chunkSize; y++) {
-                for(int x = 0; x < World.chunkSize; x++) {
+        for(int z = 0; z < World.chunkSize; z++)
+            for(int y = 0; y < World.chunkSize; y++)
+                for(int x = 0; x < World.chunkSize; x++)
                     chunkdata[x, y, z].Draw();
-                }
-            }
-        }
         CombineQuads();
+        MeshCollider collider = goChunk.AddComponent<MeshCollider>();
+        collider.sharedMesh = goChunk.GetComponent<MeshFilter>().mesh;
+        status = ChunkStatus.DONE;
     }
     
     void CombineQuads() {
