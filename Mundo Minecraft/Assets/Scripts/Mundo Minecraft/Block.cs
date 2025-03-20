@@ -29,9 +29,15 @@ public class Block
         this.pos = pos;
         this.owner = owner;
         this.material = material;
-        if(bType == BlockType.AIR) 
+        SetType(bType);
+    }
+
+    public void SetType(BlockType bType)
+    {
+        this.bType = bType;
+        if(bType == BlockType.AIR)
             isSolid = false;
-        else
+        else 
             isSolid = true;
     }
 
