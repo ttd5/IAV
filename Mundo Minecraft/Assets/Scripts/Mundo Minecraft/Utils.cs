@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Utils : MonoBehaviour
 {
-    static float smooth = 0.0002f;
+    static float smooth = 0.002f;
     static float smooth3D = 10f * smooth;
     static int maxHeigth = 150;
     static int octaves = 6;
