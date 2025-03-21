@@ -47,13 +47,18 @@ public class World : MonoBehaviour
     {
         string name = CreateChunkName(chunkPos);
         Chunk c;
-        if(!chunkDict.TryGetValue(name, out c))
+        if (!chunkDict.TryGetValue(name, out c))
         {
             c = new Chunk(chunkPos, material);
             c.goChunk.transform.parent = this.transform;
+
+            // Define a layer do chunk como "Ground"
+            c.goChunk.layer = LayerMask.NameToLayer("Ground");
+
             chunkDict.TryAdd(c.goChunk.name, c);
         }
     }
+
     
     IEnumerator RemoveChunks()
     {
