@@ -371,7 +371,7 @@
 "Assets/Scripts/Mundo Minecraft/Block.cs"
 "Assets/Scripts/Mundo Minecraft/BlockInteraction.cs"
 "Assets/Scripts/Mundo Minecraft/Chunk.cs"
-"Assets/Scripts/Mundo Minecraft/PlayerCam.cs"
+"Assets/Scripts/Mundo Minecraft/FirstPersonCamera.cs"
 "Assets/Scripts/Mundo Minecraft/Utils.cs"
 "Assets/Scripts/Mundo Minecraft/World.cs"
 -langversion:9.0
