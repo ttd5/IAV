@@ -8,18 +8,10 @@ public class BlockInteraction : MonoBehaviour
     enum InteractionType { DESTROY, BUILD };
     InteractionType interactionType;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
         bool interaction = Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1);
-        if (Input.GetMouseButtonDown(0)) Debug.Log("Botão esquerdo pressionado");
-        if (Input.GetMouseButtonDown(1)) Debug.Log("Botão direito pressionado");
         if(interaction)
         {
             interactionType = Input.GetMouseButtonDown(0) ? InteractionType.DESTROY : InteractionType.BUILD;
