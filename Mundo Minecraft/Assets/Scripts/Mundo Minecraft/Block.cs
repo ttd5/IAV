@@ -15,7 +15,7 @@ public class Block
     static Vector2 GrassTop_LBC = new Vector2(2f, 6f) / 16;
     static Vector2 Dirt_LBC = new Vector2(2f, 15f) / 16;
     static Vector2 Stone_LBC = new Vector2(0f, 14f) / 16;
-    public static Material LavaMat;
+    public static Material LavaMat  = Resources.Load<Material>("Materials/LavaMat");
 
     Vector2[,] blockUVs = {
         /*GRASS TOP*/ {GrassTop_LBC, GrassTop_LBC + new Vector2(1f, 0f)/16, GrassTop_LBC + new Vector2(0f, 1f)/16, GrassTop_LBC + new Vector2(1f, 1f)/16},
@@ -30,16 +30,16 @@ public class Block
         this.pos = pos;
         this.owner = owner;
         this.material = material;
-        if (bType == BlockType.LAVA)
-            this.material = LavaMat;
-        else
-            this.material = material;
         SetType(bType);
     }
-
     public void SetType(BlockType bType)
     {
         this.bType = bType;
+        if(bType == BlockType.LAVA)
+            this.material = LavaMat;
+        else 
+            this.material = material;
+            
         if(bType == BlockType.AIR)
             isSolid = false;
         else 
