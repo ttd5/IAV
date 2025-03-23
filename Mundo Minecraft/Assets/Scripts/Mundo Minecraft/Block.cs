@@ -5,7 +5,7 @@ using UnityEngine;
 public class Block
 {
     enum Cubeside { BOTTOM, TOP, LEFT, RIGHT, FRONT, BACK };
-    public enum BlockType { GRASS, DIRT, STONE, LAVA, BUSH, CACTUS, AIR};
+    public enum BlockType { GRASS, DIRT, STONE, LAVA, BUSH, CACTUS, DIAMOND, AIR};
     Material material;
     BlockType bType;
     Chunk owner;
@@ -17,8 +17,9 @@ public class Block
     static Vector2 Dirt_LBC = new Vector2(2f, 15f) / 16;
     static Vector2 Stone_LBC = new Vector2(0f, 14f) / 16;
     static Vector2 Lava_LBC = new Vector2(14f, 0f) / 16;
-    static Vector2 Bush_LBC = new Vector2(9f, 0f) / 16;
-    static Vector2 Cactus_LBC = new Vector2(9f, 0f) / 16;
+    static Vector2 Bush_LBC = new Vector2(12f, 10f) / 16;
+    static Vector2 Cactus_LBC = new Vector2(6f, 11f) / 16;
+    static Vector2 Diamond_LBC = new Vector2(2f, 12f) / 16;
     //public static Material LavaMat;
 
     Vector2[,] blockUVs = {
@@ -35,7 +36,9 @@ public class Block
         /*BUSH*/ {Bush_LBC, Bush_LBC + new Vector2(1f, 0f)/16,
             Bush_LBC + new Vector2(0f, 1f)/16, Bush_LBC + new Vector2(1f, 1f)/16},
         /*CACTUS*/ {Cactus_LBC, Cactus_LBC + new Vector2(1f, 0f)/16,
-            Cactus_LBC + new Vector2(0f, 1f)/16, Cactus_LBC + new Vector2(1f, 1f)/16}
+            Cactus_LBC + new Vector2(0f, 1f)/16, Cactus_LBC + new Vector2(1f, 1f)/16},
+        /*DIAMOND*/ {Diamond_LBC, Diamond_LBC + new Vector2(1f, 0f)/16,
+            Diamond_LBC + new Vector2(0f, 1f)/16, Diamond_LBC + new Vector2(1f, 1f)/16}
     };
 
     public Block(BlockType bType, Vector3 pos, Chunk owner, Material material) 

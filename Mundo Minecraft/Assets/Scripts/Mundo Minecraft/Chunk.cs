@@ -39,17 +39,21 @@ public class Chunk
                 if(worldY <= hs)
                 {
                     float below = Utils.fBM3D(worldX, worldY, worldZ, 1, 0.5f);
-                    if (below < 0.40f && worldY <= hs - 2)
+                    if (below < 0.30f && worldY <= hs - 2)
                     {
                         chunkdata[x, y, z] = new Block(Block.BlockType.DIRT, pos, this, material);
+                    }
+                    else if (below < 0.45f && below > 0.44 && worldY <= -5)
+                    {
+                        chunkdata[x, y, z] = new Block(Block.BlockType.DIAMOND, pos, this, material);
+                    }
+                    else if (below < 0.48f && worldY <= 0)
+                    {
+                        chunkdata[x, y, z] = new Block(Block.BlockType.LAVA, pos, this, material);
                     }
                     else if (below < 0.5f)
                     {
                         chunkdata[x, y, z] = new Block(Block.BlockType.STONE, pos, this, material);
-                    }
-                    else if (below < 0.515f)
-                    {
-                        chunkdata[x, y, z] = new Block(Block.BlockType.LAVA, pos, this, material);
                     }
                     else
                     {
@@ -60,7 +64,7 @@ public class Chunk
                 {
                     chunkdata[x, y, z] = new Block(Block.BlockType.GRASS, pos, this, material);
 
-                    float cactus = Utils.fBM(worldX * 0.1f, worldZ * 0.1f, 3, 0.9f);
+                    /*float cactus = Utils.fBM(worldX * 0.1f, worldZ * 0.1f, 3, 0.9f);
 
                     if (cactus > 0.54 && cactus < 0.58)
                         GenerateCactus(chunkdata, x, y, z);
@@ -70,7 +74,7 @@ public class Chunk
                         Vector3 bushPos = new Vector3(x, y + 1, z);
                         chunkdata[x, y + 1, z] = new Block(Block.BlockType.BUSH, bushPos, this, material);
                         Debug.Log($"Bush spawned at {bushPos}");
-                    }
+                    }*/
                 }
 
                 else if (worldY < h)
