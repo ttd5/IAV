@@ -5,23 +5,37 @@ using UnityEngine;
 public class Block
 {
     enum Cubeside { BOTTOM, TOP, LEFT, RIGHT, FRONT, BACK };
-    public enum BlockType { GRASS, DIRT, STONE, AIR, LAVA};
+    public enum BlockType { GRASS, DIRT, STONE, LAVA, BUSH, CACTUS, AIR};
     Material material;
     BlockType bType;
     Chunk owner;
     Vector3 pos;
     bool isSolid;
+
     static Vector2 GrassSide_LBC = new Vector2(3f, 15f) / 16;
     static Vector2 GrassTop_LBC = new Vector2(2f, 6f) / 16;
     static Vector2 Dirt_LBC = new Vector2(2f, 15f) / 16;
     static Vector2 Stone_LBC = new Vector2(0f, 14f) / 16;
-    public static Material LavaMat  = Resources.Load<Material>("Materials/LavaMat");
+    static Vector2 Lava_LBC = new Vector2(14f, 0f) / 16;
+    static Vector2 Bush_LBC = new Vector2(9f, 0f) / 16;
+    static Vector2 Cactus_LBC = new Vector2(9f, 0f) / 16;
+    //public static Material LavaMat;
 
     Vector2[,] blockUVs = {
-        /*GRASS TOP*/ {GrassTop_LBC, GrassTop_LBC + new Vector2(1f, 0f)/16, GrassTop_LBC + new Vector2(0f, 1f)/16, GrassTop_LBC + new Vector2(1f, 1f)/16},
-        /*GRASS SIDE*/ {GrassSide_LBC, GrassSide_LBC + new Vector2(1f, 0f)/16, GrassSide_LBC + new Vector2(0f, 1f)/16, GrassSide_LBC + new Vector2(1f, 1f)/16},
-        /*DIRT*/ {Dirt_LBC, Dirt_LBC + new Vector2(1f, 0f)/16, Dirt_LBC + new Vector2(0f, 1f)/16, Dirt_LBC + new Vector2(1f, 1f)/16},
-        /*STONE*/ {Stone_LBC, Stone_LBC + new Vector2(1f, 0f)/16, Stone_LBC + new Vector2(0f, 1f)/16, Stone_LBC + new Vector2(1f, 1f)/16},
+        /*GRASS TOP*/ {GrassTop_LBC, GrassTop_LBC + new Vector2(1f, 0f)/16, 
+            GrassTop_LBC + new Vector2(0f, 1f)/16, GrassTop_LBC + new Vector2(1f, 1f)/16},
+        /*GRASS SIDE*/ {GrassSide_LBC, GrassSide_LBC + new Vector2(1f, 0f)/16, 
+            GrassSide_LBC + new Vector2(0f, 1f)/16, GrassSide_LBC + new Vector2(1f, 1f)/16},
+        /*DIRT*/ {Dirt_LBC, Dirt_LBC + new Vector2(1f, 0f)/16, 
+            Dirt_LBC + new Vector2(0f, 1f)/16, Dirt_LBC + new Vector2(1f, 1f)/16},
+        /*STONE*/ {Stone_LBC, Stone_LBC + new Vector2(1f, 0f)/16,
+            Stone_LBC + new Vector2(0f, 1f)/16, Stone_LBC + new Vector2(1f, 1f)/16},
+        /*LAVA*/ {Lava_LBC, Lava_LBC + new Vector2(1f, 0f)/16,
+            Lava_LBC + new Vector2(0f, 1f)/16, Lava_LBC + new Vector2(1f, 1f)/16},
+        /*BUSH*/ {Bush_LBC, Bush_LBC + new Vector2(1f, 0f)/16,
+            Bush_LBC + new Vector2(0f, 1f)/16, Bush_LBC + new Vector2(1f, 1f)/16},
+        /*CACTUS*/ {Cactus_LBC, Cactus_LBC + new Vector2(1f, 0f)/16,
+            Cactus_LBC + new Vector2(0f, 1f)/16, Cactus_LBC + new Vector2(1f, 1f)/16}
     };
 
     public Block(BlockType bType, Vector3 pos, Chunk owner, Material material) 
@@ -32,19 +46,19 @@ public class Block
         this.material = material;
         SetType(bType);
     }
+
     public void SetType(BlockType bType)
     {
         this.bType = bType;
-        if(bType == BlockType.LAVA)
-            this.material = LavaMat;
-        else 
-            this.material = material;
-            
         if(bType == BlockType.AIR)
             isSolid = false;
         else 
             isSolid = true;
+    }
 
+    public BlockType GetType()
+    {
+        return this.bType;
     }
 
     void CreateQuad(Cubeside side) 

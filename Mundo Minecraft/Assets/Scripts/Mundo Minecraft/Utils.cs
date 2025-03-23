@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Utils : MonoBehaviour
 {
-    static float smooth = 0.002f;
+    static float smooth = 0.001f;
     static float smooth3D = 10f * smooth;
     static int maxHeigth = 150;
     static int octaves = 6;
     static float persistence = 0.7f;
-    static float offset = 32000;
+    static float offset = 32000f;
 
     public static int GenerateHeight(float x, float z) 
     {
@@ -18,7 +18,7 @@ public class Utils : MonoBehaviour
 
     public static int GenerateStoneHeight(float x, float z) 
     {
-        return (int)Map(0, maxHeigth - 10, 0, 1, fBM(x * 3 * smooth, z * 3 * smooth, octaves - 1, 1.2f * persistence));
+        return (int)Map(0, maxHeigth - 25, 0, 1, fBM(x * 3 * smooth, z * 3 * smooth, octaves - 1, 1.2f * persistence));
     }
 
     static float Map(float newmin, float newmax, float orimin, float orimax, float val)
@@ -38,7 +38,7 @@ public class Utils : MonoBehaviour
         return (xy + yx + xz + zx + yz + zy) / 6;
     }
 
-    static float fBM(float x, float z, int octaves, float persistence) 
+    public static float fBM(float x, float z, int octaves, float persistence) 
     {
         float total = 0;
         float amplitude = 1;
