@@ -17,10 +17,14 @@ public class Block
     static Vector2 Stone_LBC = new Vector2(0f, 14f) / 16;
 
     Vector2[,] blockUVs = {
-        /*GRASS TOP*/ {GrassTop_LBC, GrassTop_LBC + new Vector2(1f, 0f)/16, GrassTop_LBC + new Vector2(0f, 1f)/16, GrassTop_LBC + new Vector2(1f, 1f)/16},
-        /*GRASS SIDE*/ {GrassSide_LBC, GrassSide_LBC + new Vector2(1f, 0f)/16, GrassSide_LBC + new Vector2(0f, 1f)/16, GrassSide_LBC + new Vector2(1f, 1f)/16},
-        /*DIRT*/ {Dirt_LBC, Dirt_LBC + new Vector2(1f, 0f)/16, Dirt_LBC + new Vector2(0f, 1f)/16, Dirt_LBC + new Vector2(1f, 1f)/16},
-        /*STONE*/ {Stone_LBC, Stone_LBC + new Vector2(1f, 0f)/16, Stone_LBC + new Vector2(0f, 1f)/16, Stone_LBC + new Vector2(1f, 1f)/16},
+        /*GRASS TOP*/ {GrassTop_LBC, GrassTop_LBC + new Vector2(1f, 0f)/16, 
+            GrassTop_LBC + new Vector2(0f, 1f)/16, GrassTop_LBC + new Vector2(1f, 1f)/16},
+        /*GRASS SIDE*/ {GrassSide_LBC, GrassSide_LBC + new Vector2(1f, 0f)/16, 
+            GrassSide_LBC + new Vector2(0f, 1f)/16, GrassSide_LBC + new Vector2(1f, 1f)/16},
+        /*DIRT*/ {Dirt_LBC, Dirt_LBC + new Vector2(1f, 0f)/16, 
+            Dirt_LBC + new Vector2(0f, 1f)/16, Dirt_LBC + new Vector2(1f, 1f)/16},
+        /*STONE*/ {Stone_LBC, Stone_LBC + new Vector2(1f, 0f)/16, 
+            Stone_LBC + new Vector2(0f, 1f)/16, Stone_LBC + new Vector2(1f, 1f)/16},
     };
 
     public Block(BlockType bType, Vector3 pos, Chunk owner, Material material) 
