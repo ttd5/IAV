@@ -35,7 +35,7 @@ public class Chunk
                 if(worldY <= hs)
                 {
                     if (Utils.fBM3D(worldX, worldY, worldZ, 1, 0.5f) < 0.51f)
-                        chunkdata[x, y, z] = new Block(Block.BlockType.STONE, pos, this, material);
+                        chunkdata[x, y, z] = new Block(Block.BlockType.LAVA, pos, this, material);
                     else
                         chunkdata[x, y, z] = new Block(Block.BlockType.AIR, pos, this, material);
                 }
